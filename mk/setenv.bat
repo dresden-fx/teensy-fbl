@@ -33,3 +33,4 @@ set GIT_HOME=%DRIVE%\dvpt\tools\git-2.25.0
 set GIT_ROOT=%GIT_HOME%\bin
 set PATH=%GIT_ROOT%;%PATH%
 
+set GIT=git
