@@ -1,6 +1,26 @@
 #ifndef SW_RELEASE_H
 #define SW_RELEASE_H
 
+#define QUOTE(s) #s
+#define QUOTE_AND_EXPAND(s) QUOTE(s)
+
+#define UINT32_TO_BYTES(word) \
+  (uint8)((word) >> 24), (uint8)((word) >> 16), (uint8)((word) >> 8), (uint8)((word) >> 0)
+
+#define BYTES_TO_UINT32(b3, b2, b1, b0) \
+  ((uint32) ( (((uint8)(b3)) << 24)     \
+            | (((uint8)(b2)) << 16)     \
+            | (((uint8)(b1)) <<  8)     \
+            | (((uint8)(b0)) <<  0)))
+
+#define UINT16_TO_BYTES(halfword) \
+  (uint8)((halfword) >> 8), (uint8)((halfword) >> 0)
+
+#define BYTES_TO_UINT16(b1, b0)         \
+  ((uint16) ( (((uint8)(b1)) <<  8)     \
+            | (((uint8)(b0)) <<  0)))
+
+
 #define SW_REL_LAYOUT_ID     0
 #define SW_REL_MAX_VER_SIZE 12
 

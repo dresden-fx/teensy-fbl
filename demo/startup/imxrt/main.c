@@ -4,7 +4,6 @@
 
 #include "bsp.h"
 #include "reg.h"
-#include "libc.h"
 #include "trace_pub.h"
 #include "arm_sys_timer.h"
 
@@ -16,9 +15,10 @@
 #include "hab_api.h"
 #include "hab_info.h"
 #include "ocotp_info.h"
+#include "img_info.h"
 
 
-/* Pad configuration value for the UART pads */
+/* Pad configuration value for the LED pads */
 #define GPIO_O_PAD_CONF 0 \
   | BF_SET(PADCONF_eHYS_DIS, PADCONF_HYS_BF)    \
   | BF_SET(PADCONF_eODE_DIS, PADCONF_ODE_BF)       \
@@ -75,55 +75,7 @@ T_CCM_CLK_CFG led_clkCfg[] =
 #endif /* BSP_BOARD_TYPE */
 
 
-void delay(uint32 dly)
-{
-   volatile int timeout = dly;
-   while(timeout > 0)
-   {
-     timeout--;
-   }
-}
-
-
-void blink(uint16 cnt)
-{
-  uint32 onTime = 0x00400000;
-  uint32 offTime = 0x00600000;
-
-  while(cnt > 0)
-  {
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_SET_OFFS);
-    delay(onTime);
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_CLR_OFFS);  
-    delay(offTime);
-    cnt--;
-  }
-}
-
-void flash(uint16 cnt)
-{
-  uint32 onTime = 0x00100000;
-  uint32 offTime = 0x00200000;
-
-  while(cnt > 0)
-  {
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_SET_OFFS);
-    delay(onTime);
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_CLR_OFFS);  
-    delay(offTime);
-    cnt--;
-  }
-}
-
-
-#if 1
-void earlyDbg_hit(void)
-{
-  REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_SET_OFFS);
-}
-#endif
-
-int putchar(int c)
+int demo_putchar(int c)
 {
   earlyDbg_sendChar((char)c);
   return c;
@@ -146,26 +98,35 @@ void checkHab(void)
 
 int main(void)
 {
-#if 0
-  volatile int i = 0;
-  char printBuffer[128];
-#endif
-
   earlyDbg_init();
 
   TRACE_INFO("\n\n\n");
   TRACE_INFO("CPU initialized and running from %08X\n", (uint32)(void*)&main);
 
+  
+#if 1
   ldr_dumpLinkerInfo();
+#endif
 
-  libc_registerPutcharCallback(&putchar);
+#if 1
+  do
+  {
+    const T_SWINFO* swInfo;
+    swInfo = swinfo_getOwnSwInfo();
+	imginfo_dumpSwInfo(swInfo);
+  }while(0);
+#endif
 
+#if 1
   ocotp_dumpUid();
   ocotp_dumpSrkHash();
   TRACE_INFO("\n");
+#endif
 
+#if 1
   boot_dumpBootInfo();
   TRACE_INFO("\n");
+#endif
   
 #if 1
   do
@@ -187,7 +148,9 @@ int main(void)
   }while(0);
 #endif
 
+#if 1
   checkHab();
+#endif
 
   arm_initSysTimer(0, (396000000 / 1000) - 1);
   int cnt = 0;
@@ -195,16 +158,13 @@ int main(void)
   {
     if(0 != arm_pollSysTimer())
     {
-      if(cnt == 500)
+      if(cnt == 250)
       {
         REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_SET_OFFS);
-        TRACE_INFO("Tick...\n");
       }
-      else if(cnt == 1000)
+      else if(cnt == 500)
       {
         REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_CLR_OFFS);
-        TRACE_INFO("Tack...\n");
-        
         cnt = 0;
       }
       else
@@ -217,5 +177,3 @@ int main(void)
 }
 
 int armv7m_main(void) __attribute__((alias("main")));
-
-

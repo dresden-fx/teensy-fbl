@@ -132,53 +132,6 @@ void boot_dumpBootInfo(void)
 }
 
 
-static void xdelay(uint32 dly)
-{
-   volatile int timeout = dly;
-   while(timeout > 0)
-   {
-     timeout--;
-   }
-}
-
-static void xblink(uint16 cnt)
-{
-  uint32 onTime = 0x02000000;
-  uint32 offTime = 0x02800000;
-
-  while(cnt > 0)
-  {
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_SET_OFFS);
-    xdelay(onTime);
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_CLR_OFFS);  
-    xdelay(offTime);
-    cnt--;
-  }
-}
-
-static void xflash(uint16 cnt)
-{
-  uint32 onTime = 0x00800000;
-  uint32 offTime = 0x00A00000;
-
-  while(cnt > 0)
-  {
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_SET_OFFS);
-    xdelay(onTime);
-    REG32_WR_BASE_OFFS((7<<2), GPIO7_BASE, GPIO_DR_CLR_OFFS);  
-    xdelay(offTime);
-    cnt--;
-  }
-}
-
-void xhit(uint32 nr)
-{
-  xblink(1);
-  xflash(nr);
-  xdelay(0x08000000);
-}
-
-
 void reset_PFD()
 {
   //Reset PLL2 PFDs, set default frequencies:
@@ -196,15 +149,10 @@ void reset_PFD()
 
 void armv7m_default_handler(void)
 {
-   while(1)
-   {
-      xflash(3);
-      xdelay(0x02000000);
-      xblink(3);
-      xdelay(0x02000000);
-      xflash(3);
-      xdelay(0x08000000);
-   }
+  while(1)
+  {
+    ;
+  }
 }
 
 

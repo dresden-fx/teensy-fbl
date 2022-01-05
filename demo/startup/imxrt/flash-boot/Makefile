@@ -55,6 +55,7 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += $(SERVDIR)/swinfo
   SRC_EXE       += swinfo.c
   SRC_EXE       += sw_release.c
+  SRC_EXE       += img_info.c
 
   INCDIR        += $(DRVDIR)/hab
   SRCDIR        += $(DRVDIR)/hab

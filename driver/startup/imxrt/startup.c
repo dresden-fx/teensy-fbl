@@ -26,7 +26,6 @@ void armv7m_init(void)
   }
 
   // PIT & GPT timers to run from 24 MHz clock (independent of CPU speed)
-//  CCM_CSCMR1 = (CCM_CSCMR1 & ~CCM_CSCMR1_PERCLK_PODF(0x3F)) | CCM_CSCMR1_PERCLK_CLK_SEL;
   REG32_RD_BASE_OFFS(reg, CCM_DIGITAL_BASE, CCM_CSCMR1_OFFS);
   reg &= ~( 0
           | BF_MASK(CCM_CSCMR1_PER_CLK_PODF_BF)
@@ -38,7 +37,6 @@ void armv7m_init(void)
   REG32_WR_BASE_OFFS(reg, CCM_DIGITAL_BASE, CCM_CSCMR1_OFFS);
 
   // UARTs run from 24 MHz clock (works if PLL3 off or bypassed)
-//  CCM_CSCDR1 = (CCM_CSCDR1 & ~CCM_CSCDR1_UART_CLK_PODF(0x3F)) | CCM_CSCDR1_UART_CLK_SEL; 
   REG32_RD_BASE_OFFS(reg, CCM_DIGITAL_BASE, CCM_CSCDR1_OFFS);
   reg &= ~( 0
           | BF_MASK(CCM_CSCDR1_UART_CLK_PODF_BF)
