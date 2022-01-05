@@ -34,12 +34,7 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += .
   SRCDIR        += ..
 
-  SRC_EXE       += sw_release.c
-  SRC_EXE       += swinfo.c
-
-  SRC_EXE       += armv7m_entry.S
   SRC_EXE       += flexspi_config_tbl.c
-  SRC_EXE       += startup.c
   SRC_EXE       += main.c
   SRC_EXE       += misc.c
 
@@ -47,8 +42,19 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += ../specific
   SRC_EXE       += flex_trc.c
   
+  INCDIR        += $(DRVDIR)/startup
+  SRCDIR        += $(DRVDIR)/startup
+  SRC_EXE       += armv7m_entry.S
+  SRC_EXE       += startup.c
+
+  INCDIR        += $(DRVDIR)/fwdesc/imx
   SRCDIR        += $(DRVDIR)/fwdesc/imx
   SRC_EXE       += ivt.c
+
+  INCDIR        += $(SERVDIR)/swinfo
+  SRCDIR        += $(SERVDIR)/swinfo
+  SRC_EXE       += swinfo.c
+  SRC_EXE       += sw_release.c
 
   INCDIR        += $(DRVDIR)/hab
   SRCDIR        += $(DRVDIR)/hab
