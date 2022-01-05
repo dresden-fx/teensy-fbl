@@ -133,14 +133,18 @@ include $(MKDIR)/generic.mk
 include $(MKDIR)/Makefile.version
 
 SIGN_OPTS  = --image-type=MMC
-SIGN_OPTS += --ivt-offs=0x1000
-SIGN_OPTS += --input-file=__out__/imxrt/boot.bin
-SIGN_OPTS += --crc-offs=0x208
-SIGN_OPTS += --srk-idx=0
+SIGN_OPTS += --ivt-offs=0x1000                                # Default IVT offset
+SIGN_OPTS += --input-file=__out__/imxrt/boot.bin              # Input binary image to be signed
+SIGN_OPTS += --crc-offs=0x208                                 # Offset at which to patch the CRC
+SIGN_OPTS += --srk-idx=0                                      # Super Root Key to use for signing
 
-SIGN_OPTS += --srk-tbl=SRK_table.bin
-SIGN_OPTS += --noca-key=SRK1_sha256_2048_65537_v3_usr_crt.pem
+SIGN_OPTS += --srk-tbl=SRK_table.bin                          # Table of SRKs to use for signing
+SIGN_OPTS += --noca-key=SRK1_sha256_2048_65537_v3_usr_crt.pem # 
+
+CRC_OPTS   = --input-file=__out__/imxrt/image_exp.bin         #
+CRC_OPTS  += --crc-offs=0x208                                 #
+CRC_OPTS  += --output-file=__out__/imxrt/image_exp.fbl        #
 
 postlink: bin
 	@perl -w $(UTILDIR)/hab-sign/genSignCfg.pl $(SIGN_OPTS)
-	@perl -w $(UTILDIR)/patchCrc/patchCrc.pl --input-file=__out__/imxrt/image_exp.bin --crc-offs=0x208 --output-file=__out__/imxrt/image_exp.fbl
+#	@perl -w $(UTILDIR)/patchCrc/patchCrc.pl $(CRC_OPTS)
