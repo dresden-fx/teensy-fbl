@@ -10,7 +10,7 @@ echo ""                                                              2>&1 | tee 
 make -j -C ./driver/startup/imxrt/flash-boot PLATFORM=IMXRT clean    2>&1 | tee -a report.txt
 make -j -C ./driver/startup/imxrt/flash-boot PLATFORM=IMXRT version  2>&1 | tee -a report.txt
 make -j -C ./driver/startup/imxrt/flash-boot PLATFORM=IMXRT hex      2>&1 | tee -a report.txt
-rem make -j -C ./driver/startup/imxrt/flash-boot PLATFORM=IMXRT postlink 2>&1 | tee -a report.txt
+# make -j -C ./driver/startup/imxrt/flash-boot PLATFORM=IMXRT postlink 2>&1 | tee -a report.txt
 echo ""                                                              2>&1 | tee -a report.txt
 echo ""                                                              2>&1 | tee -a report.txt
 
