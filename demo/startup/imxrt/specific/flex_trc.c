@@ -5,7 +5,7 @@
 #include "bsp.h"
 #include "trace_flex.h"
 
-#include "misc.h"
+#include "uart.h"
 
 T_STATUS flex_trc_init(void)
 {
@@ -21,6 +21,6 @@ T_STATUS flex_trc_deinit(void)
 
 void flex_trc_sendString(const char* str)
 {
-  earlyDbg_sendStr(str);
+  uart_puts(str);
 }
 

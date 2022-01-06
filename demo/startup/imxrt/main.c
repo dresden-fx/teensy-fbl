@@ -3,13 +3,17 @@
 #endif /* MAIN_C */
 
 #include "bsp.h"
+#include "config.h"
 #include "reg.h"
 #include "trace_pub.h"
 #include "arm_sys_timer.h"
 
+#include "irqc.h"
 #include "iomux.h"
 #include "gpio.h"
 #include "ccm.h"
+#include "uart.h"
+#include "cpu_irq.h"
 #include "misc.h"
 
 #include "hab_api.h"
@@ -75,13 +79,6 @@ T_CCM_CLK_CFG led_clkCfg[] =
 #endif /* BSP_BOARD_TYPE */
 
 
-int demo_putchar(int c)
-{
-  earlyDbg_sendChar((char)c);
-  return c;
-}
-
-
 void checkHab(void)
 {
   if(HAB_API_OK != hab_getStatus())
@@ -96,14 +93,27 @@ void checkHab(void)
 }
 
 
+void cpu_init(void)
+{
+  cpu_enableIRQs();
+  return;
+}
+
+
 int main(void)
 {
-  earlyDbg_init();
+  irqc_init();
+  
+  uart_initDev(STD_UART);
+  uart_configCtl(STD_UART, &uart_ctlDevCfgTbl[0]);
+  
+  trace_init();
 
+  cpu_init();
+  
   TRACE_INFO("\n\n\n");
   TRACE_INFO("CPU initialized and running from %08X\n", (uint32)(void*)&main);
 
-  
 #if 1
   ldr_dumpLinkerInfo();
 #endif

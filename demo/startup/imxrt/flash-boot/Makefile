@@ -20,7 +20,6 @@ INCDIR += $(CMNDIR)/generic        # svc_call.h
 INCDIR += $(SERVDIR)/libc          # libc.h
 INCDIR += $(DRVDIR)/inc            # imxrt.h
 INCDIR += $(DRVDIR)/inc/arm/armv7m # armv7m_regmap.h
-INCDIR += $(DRVDIR)/uart           # uart.h
 
 ASMDIR  = ..
 LINKDIR = ./link
@@ -84,17 +83,40 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += $(DRVDIR)/gpio
   SRC_EXE       += gpio.c
 
+  INCDIR        += $(DRVDIR)/irqc
+  SRCDIR        += $(DRVDIR)/irqc
+  SRC_EXE       += irqc.c
+  SRC_EXE       += arm_nvic.c
+
+  INCDIR        += $(DRVDIR)/uart
+  SRCDIR        += $(DRVDIR)/uart
+  SRC_EXE       += uart.c
+  SRC_EXE       += uart_irq.c
+
+  INCDIR        += $(DRVDIR)/uart/imxrt/specific
+  SRCDIR        += $(DRVDIR)/uart/imxrt/specific
+  SRC_EXE       += uart_ddm.c
+
   INCDIR        += $(SERVDIR)/trace
   SRCDIR        += $(SERVDIR)/trace
   SRC_EXE       += trace_core.c
   SRC_EXE       += trace_flex.c
 
+  INCDIR        += $(SERVDIR)/rbuf
+  SRCDIR        += $(SERVDIR)/rbuf
+  SRC_EXE       += rbuf.c
+
   INCDIR        += $(SERVDIR)/libc
   SRCDIR        += $(SERVDIR)/libc
   SRC_EXE       += libc.c
 
+  INCDIR        += $(CMNDIR)/generic
   SRCDIR        += $(CMNDIR)/generic
   SRC_EXE       += cpu_asm.S
+
+  INCDIR        += $(CMNDIR)/generic/armv7m
+  SRCDIR        += $(CMNDIR)/generic/armv7m
+  SRC_EXE       += cpu_irq.c
 
   SRC_LNK       += flash-boot.ld.S
 
