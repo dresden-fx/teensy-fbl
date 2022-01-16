@@ -28,7 +28,7 @@ enum UART_CTL_STATE
 uint32 std_dev = STD_UART;
 #elif (BSP_BOARD_TYPE == BSP_BRD_MIMXRT1060_EVK)
 uint32 std_dev = 0;
-#elif (BSP_BOARD_TYPE == BSP_BRD_TENSY40)
+#elif (BSP_BOARD_TYPE == BSP_BRD_TEENSY40)
 uint32 std_dev = 2;
 #else /* unknown board */
 uint32 std_dev = 0;
