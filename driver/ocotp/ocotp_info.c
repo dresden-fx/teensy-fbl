@@ -167,3 +167,64 @@ void ocotp_dumpMemFuses(void)
 }
 
 
+/*
+ ******************************************************************************
+ *
+ ******************************************************************************
+ *
+ *
+ ******************************************************************************
+ */
+
+void ocotp_dumpLockFuses(void)
+{
+  uint32 reg;
+  uint32 tmp;
+
+  /* */
+  REG32_RD_BASE_OFFS(reg, OCOTP_BASE, OCOTP_LOCK_FUSE_OFFS);
+  TRACE_INFO("FUSE_LOCK = %08x\n", reg);
+
+  tmp = BF_GET(reg, LOCK_FUSE_TESTER_LOCK_BF);
+  TRACE_INFO(" TESTER_LOCK:    %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_BOOT_CFG_LOCK_BF);
+  TRACE_INFO(" BOOT_CFG_LOCK:  %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_MEM_TRIM_LOCK_BF);
+  TRACE_INFO(" MEM_TRIM_LOCK:  %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_SJC_RESP_LOCK_BF);
+  TRACE_INFO(" SJC_RESP_LOCK:  %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_GP4_RD_LOCK_BF);
+  TRACE_INFO(" GP4_RD_LOCK:    %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_MAC_ADDR_LOCK_BF);
+  TRACE_INFO(" MAC_ADDR_LOCK:  %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_GP1_LOCK_BF);
+  TRACE_INFO(" GP1_LOCK:       %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_GP2_LOCK_BF);
+  TRACE_INFO(" GP2_LOCK:       %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_SRK_LOCK_BF);
+  TRACE_INFO(" SRK_LOCK:       %x\n", tmp);
+
+  tmp = BF_GET(reg, LOCK_FUSE_OTPMK_MSB_LOCK_BF);
+  TRACE_INFO(" OTPMK_MSB_LOCK: %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_SW_GP1_LOCK_BF);
+  TRACE_INFO(" SW_GP1_LOCK:    %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_OTPMK_LSB_LOCK_BF);
+  TRACE_INFO(" OTPMK_LSB_LOCK: %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_ANALOG_LOCK_BF);
+  TRACE_INFO(" ANALOG_LOCK:    %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_OTPMK_CRC_LOCK_BF);
+  TRACE_INFO(" OTPMK_CRV_LOCK: %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_SW_GP2_LOCK_BF);
+  TRACE_INFO(" SW_GP2_LOCK:    %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_MISC_CFG_LOCK_BF);
+  TRACE_INFO(" MISC_CFG_LOCK:  %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_SW_GP2_RD_LOCK_BF);
+  TRACE_INFO(" SW_GP2_RD_LOCK: %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_GP4_LOCK_BF);
+  TRACE_INFO(" GP4_LOCK:       %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_GP3_LOCK_BF);
+  TRACE_INFO(" GP3_LOCK:       %x\n", tmp);
+  tmp = BF_GET(reg, LOCK_FUSE_FIELD_RETURN_BF);
+  TRACE_INFO(" FIELD_RET_LOCK: %x\n", tmp);
+}
+

@@ -123,13 +123,14 @@ int main(void)
   {
     const T_SWINFO* swInfo;
     swInfo = swinfo_getOwnSwInfo();
-	imginfo_dumpSwInfo(swInfo);
+    imginfo_dumpSwInfo(swInfo);
   }while(0);
 #endif
 
 #if 1
   ocotp_dumpUid();
   ocotp_dumpSrkHash();
+  ocotp_dumpLockFuses();
   TRACE_INFO("\n");
 #endif
 

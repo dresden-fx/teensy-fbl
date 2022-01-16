@@ -7,6 +7,7 @@ extern void ocotp_dumpTesterFuses(void);
 extern void ocotp_dumpAnalogFuses(void);
 extern void ocotp_dumpBootFuses(void);
 extern void ocotp_dumpMemFuses(void);
+extern void ocotp_dumpLockFuses(void);
 
 #endif /* OCOTP_INFO_H */
 
