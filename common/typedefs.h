@@ -71,7 +71,10 @@ typedef int_fast64_t      sint64_least;
 typedef enum STATUS
 {
   STATUS_eOK = 0,
-  STATUS_eNOK = 1,
+  STATUS_eNOK,
+  STATUS_ePENDING,
+  STATUS_eINVALID_ARG,
+  STATUS_eNOMEM,
 }T_STATUS;
 
 
