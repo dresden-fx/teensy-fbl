@@ -1,7 +1,8 @@
-.PHONY: sdp-boot flash-boot flash-app ram-boot
+.PHONY: flash-boot flash-app ram-boot
+help:
+	@ echo "Targets:"
+	@ echo "flash-boot"
 
-sdp-boot:
-	$(QUITE) $(MAKE) -C sdp-boot PLATFORM=IMXRT version postlink
 
 flash-boot:
 	$(QUITE) $(MAKE) -C flash-boot PLATFORM=IMXRT version postlink

@@ -32,26 +32,27 @@ SECTIONS
   /* Set location counter to address zero  */
   . = 0;
   /* Remember image start */
-  __image_start = ORIGIN(EXT_FLASH);
+  __image_start = ORIGIN(FBL_CODE);
 
   /*
    * IMXRT needs a flash configuration at the beginning of external flash
    */
   .flash_cfg :
   {
+    __fls_cfg_start = .;
     KEEP(*(.flash_cfg))
+    __fls_cfg_end = .;
     FILL(0xFF)
-    . = ALIGN(0x200);
   } > EXT_FLASH
-  __fls_cfg_start = (SIZEOF(.flash_cfg) > 0) ? (ADDR(.flash_cfg)) : 0;
-  __fls_cfg_end = (SIZEOF(.flash_cfg) > 0) ? (ADDR(.flash_cfg) + SIZEOF(.flash_cfg) - 1) : 0;
-
+  
 
   .text.sw_info :
   {
     __sw_info_start = .;
     KEEP(*(.sw_info))
     KEEP(*(.sw_rel_info))
+    FILL(0x01)
+    . = ALIGN(0x400);
     __sw_info_end = .;
   } > EXT_FLASH
 
@@ -75,12 +76,12 @@ SECTIONS
      * in C-files.
      * Make sure it is aligned to 2^4.
      */
-    . = ALIGN(0x400);
     *(.armv7m_vect) /* Section defined for vectors in armv7m_entry.S */
     *(.m7start)     /* Section defined for start code in armv7m_entry.S */
     *(.armboot)
     *(.exit)
     *init*.o(.text)
+    . = ALIGN(0x100);
     __boot_end = .;
     . = ALIGN(0x1000);
   } > EXT_FLASH
@@ -234,14 +235,25 @@ SECTIONS
     __pad_start = .;
     BYTE(0xA5)
     FILL(0x5A)
-    . = ALIGN(0x1000);
+    . = ALIGN(0x400);
     __pad_end = .;
   } > EXT_FLASH
 
 
-  __image_size = SIZEOF(.flash_cfg) + SIZEOF(.text.boot) + SIZEOF(.text.ivt) + SIZEOF(.text.progmem) + SIZEOF(.data) + SIZEOF(.text.pad) + MAX_HAB_CSF_DATA_SIZE;
+  __image_size = SIZEOF(.flash_cfg) + SIZEOF(.text.sw_info) + SIZEOF(.text.boot) + SIZEOF(.text.ivt) + SIZEOF(.text.dcd) + SIZEOF(.text.progmem) + SIZEOF(.data) + SIZEOF(.text.pad) + MAX_HAB_CSF_DATA_SIZE;
 
+  .noInit (NOLOAD) : ALIGN(0x100)
+  {
+    __noinit_start = .;
+    *(.noInitData)
+    __noinit_end = .;
+  } > OCRAM
 
+  .ram_vect (NOLOAD) : ALIGN(0x400)
+  {
+    *(.m7vect);
+  } > OCRAM
+  
   /* The .bss section comes after the hab data because it is not signed */
   .bss (NOLOAD) : ALIGN(0x100)
   {

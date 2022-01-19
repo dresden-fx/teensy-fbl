@@ -81,7 +81,7 @@ T_CCM_CLK_CFG led_clkCfg[] =
 
 void checkHab(void)
 {
-  if(HAB_API_OK != hab_getStatus())
+  if(STATUS_eOK != hab_getStatus())
   {
     TRACE_INFO("ROM-Boot detected HAB failue in image.\n");
   }
