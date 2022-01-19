@@ -5,9 +5,7 @@
 #include "bsp.h"
 #include "reg.h"
 #include "trace_pub.h"
-#include "libc.h"
 #include "hab.h"
-//#include "caam.h"
 #include "hab_prv.h"
 #include "hab_api.h"
 
@@ -106,163 +104,30 @@ uint32 hab_getOwnDcdSize(void)
  ******************************************************************************
  *
  ******************************************************************************
- * @brief Get the address of the image's device configuration data (DCD) from
- *   the image vector table.
- *
- ******************************************************************************
- */
-
-const void* hab_getDcdAddrFromIvt(const void* ivtAddr)
-{
-  const T_HAB_IVT* hab_ivt = ivtAddr;
-  return hab_ivt->dcd;
-}
-
-
-/*
- ******************************************************************************
- *
- ******************************************************************************
- * @brief Get the address of the image's boot data from the image vector table.
- *
- ******************************************************************************
- */
-
-const void* hab_getBootAddrFromIvt(const void* ivtAddr)
-{
-  const T_HAB_IVT* habIvt = ivtAddr;
-  return habIvt->boot_data;
-}
-
-
-/*
- ******************************************************************************
- *
- ******************************************************************************
- * @brief Get the image's entry address from the image vector table.
- *
- ******************************************************************************
- */
-
-const void* hab_getEntryAddrFromIvt(const void* ivtAddr)
-{
-  const T_HAB_IVT* hab_ivt = ivtAddr;
-  return hab_ivt->entry;
-}
-
-
-/*
- ******************************************************************************
- *
- ******************************************************************************
- * @brief Get the image's payload address from the image vector table.
- *
- ******************************************************************************
- */
-
-const void* hab_getPayloadAddrFromIvt(const void* ivtAddr)
-{
-  const T_HAB_IVT* ivt = ivtAddr;
-  const T_HAB_BOOT_DATA* boot;
-  const void* result;
-
-  boot = ivt->boot_data;
-  if(boot != NULL)
-  {
-    result = (void*)boot->start;
-  }
-  else
-  {
-    result = 0;
-  }
-  return result;
-}
-
-
-/*
- ******************************************************************************
- *
- ******************************************************************************
- * @brief Get the image's payload size from the image vector table.
- *
- ******************************************************************************
- */
-
-uint32 hab_getPayloadSizeFromIvt(const void* ivtAddr)
-{
-  const T_HAB_IVT* ivt = ivtAddr;
-  const T_HAB_BOOT_DATA* boot;
-  uint32 result;
-
-  boot = ivt->boot_data;
-  if(boot != NULL)
-  {
-    result = boot->size - (uint32)((void*)ivt->entry - (void*)boot->start);
-  }
-  else
-  {
-    result = 0;
-  }
-  return result;
-}
-
-
-/*
- ******************************************************************************
- *
- ******************************************************************************
- * @brief Get the image's entire size from the image vector table.
- *
- ******************************************************************************
- */
-
-uint32 hab_getImageSizeFromIvt(const void* ivtAddr)
-{
-  const T_HAB_IVT* ivt = ivtAddr;
-  const T_HAB_BOOT_DATA* boot;
-  uint32 result;
-
-  boot = ivt->boot_data;
-  if(boot != NULL)
-  {
-    result = boot->size;
-  }
-  else
-  {
-    result = 0;
-  }
-  return result;
-}
-
-
-/*
- ******************************************************************************
- *
- ******************************************************************************
  *
  *
  ******************************************************************************
  */
 
-int hab_getStatus(void)
+T_STATUS hab_getStatus(void)
 {
   T_HAB_STATUS status;
-  int result;
+  T_STATUS result;
 
   status = hab_data.rvt->reportStatus(NULL, NULL);
   switch(status)
   {
   case HAB_STATUS_SUCCESS:
-    result = HAB_API_OK;
+    result = STATUS_eOK;
     break;
   case HAB_STATUS_WARN:
-    result = HAB_API_WARN;
+    result = STATUS_eNOK;
     break;
   case HAB_STATUS_FAIL:
-    result = HAB_API_FAIL;
+    result = STATUS_eNOK;
     break;
   default:
-    result = HAB_API_FAIL;
+    result = STATUS_eNOK;
     break;
   }
   return result;
@@ -278,15 +143,15 @@ int hab_getStatus(void)
  ******************************************************************************
  */
 
-int hab_init(void)
+T_STATUS hab_init(void)
 {
   T_HAB_STATUS status;
-  int result = HAB_API_OK;
+  T_STATUS result = STATUS_eOK;
 
   status = hab_data.rvt->entry();
   if(HAB_STATUS_SUCCESS != status)
   {
-    result = HAB_API_FAIL;
+    result = STATUS_eNOK;
     TRACE_INFO("Failed to enter HAB!\n");
   }
   else
@@ -306,16 +171,16 @@ int hab_init(void)
  ******************************************************************************
  */
 
-int hab_deinit(void)
+T_STATUS hab_deinit(void)
 {
   T_HAB_STATUS status;
-  int result = HAB_API_OK;
+  T_STATUS result = STATUS_eOK;
 
   status = hab_data.rvt->exit();
   if(HAB_STATUS_SUCCESS != status)
   {
     TRACE_INFO("Failed to exit HAB!\n");
-    result = HAB_API_FAIL;
+    result = STATUS_eNOK;
   }
   else
   {
@@ -334,15 +199,15 @@ int hab_deinit(void)
  ******************************************************************************
  */
 
-int hab_checkTargetMem(void* startAddr, uint32 length)
+T_STATUS hab_checkTargetMem(void* startAddr, uint32 length)
 {
   T_HAB_STATUS status;
-  int result = HAB_API_OK;
+  T_STATUS result = STATUS_eOK;
 
   status = hab_data.rvt->checkTarget(HAB_TRG_MEM, startAddr, length);
   if(status != HAB_STATUS_SUCCESS)
   {
-    result = HAB_API_FAIL;
+    result = STATUS_eNOK;
   }
   return result;
 }
@@ -396,11 +261,11 @@ boolean hab_isIvtValid(const void* ivtAddr)
 #define IVT_ALIGNMENT 0x1000
 #define CSF_PAD_SIZE  0x2000
 
-int hab_authImage(uint32 imageAddr, uint32 imageSize, uint32 ivtOffs)
+T_STATUS hab_authImage(uint32 imageAddr, uint32 imageSize, uint32 ivtOffs)
 {
   T_HAB_STATUS status;
   T_HAB_ENTRY entry;
-  int result = HAB_API_FAIL;
+  T_STATUS result = STATUS_eNOK;
 
   /* Enable clocks of CAAM module */
 //  caam_enableClocks();
@@ -427,27 +292,27 @@ int hab_authImage(uint32 imageAddr, uint32 imageSize, uint32 ivtOffs)
        * So in open configuration the authImage function will return the entry
        * even if the authentication failed.
        */
-      result = HAB_API_FAIL;
+      result = STATUS_eNOK;
       TRACE_INFO("failed\n");
     }
-    else if(HAB_API_OK != hab_getStatus())
+    else if(STATUS_eOK != hab_getStatus())
     {
-      result = HAB_API_FAIL;
+      result = STATUS_eNOK;
       TRACE_INFO("failed\n");
     }
     else
     {
-      result = HAB_API_OK;
+      result = STATUS_eOK;
       TRACE_INFO("success\n");
       TRACE_INFO("Entry: 0x%08X\n", entry);
     }
   }
 
-  if( HAB_STATUS_SUCCESS != status )
+  if(HAB_STATUS_SUCCESS != status)
   {
     TRACE_INFO("HAB: Failed to enter!\n");
   }
-  else if(HAB_STATUS_SUCCESS != hab_data.rvt->exit() )
+  else if(HAB_STATUS_SUCCESS != hab_data.rvt->exit())
   {
     TRACE_INFO("HAB: Failed to exit!\n");
   }

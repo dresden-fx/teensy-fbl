@@ -456,6 +456,34 @@ char* hab_getAlgorithmStr(uint8 algorithmTag)
  ******************************************************************************
  *
  ******************************************************************************
+ * @brief Get textual name for given key type tag
+ *
+ ******************************************************************************
+ */
+
+char* hab_getKeyTypeStr(T_HAB_KEY keyTypeTag)
+{
+  char* keyTypeStr;
+  switch(keyTypeTag)
+  {
+  case HAB_KEY_PUBLIC:
+    keyTypeStr = "PUBLIC";
+    break;
+  case HAB_KEY_HASH:
+    keyTypeStr = "HASH";
+    break;
+  default:
+    keyTypeStr = "Unknown!";
+    break;
+  }
+  return keyTypeStr;
+}
+
+
+/*
+ ******************************************************************************
+ *
+ ******************************************************************************
  * @brief Print the content of the command description for
  *   InstallKey command to the console
  *
@@ -483,6 +511,17 @@ void hab_dumpInsKeyCmd(const uint8* cmdData, uint32 bytes)
   TRACE_INFO("\n             H C M F C D C A");
   TRACE_INFO("\n             S I I I F A S B");
   TRACE_INFO("\n             H D D D G T F S");
+
+  /*
+   * HSH .. Certificate hash present
+   * CID .. Key binds to Caller ID
+   * MID .. Key binds to Manufacturing ID
+   * FID .. Key binds to Fabrication UID
+   * CFG .. Key binds to Configuration
+   * DAT .. Key binds to Data Type
+   * CSF .. Install CSF key
+   * ABS .. Absolute Certificate Address
+   */
 
   TRACE_INFO("\n    Proto:   0x%02X -> %s", cmd->pcl, hab_getProtocolStr(cmd->pcl));
   TRACE_INFO("\n    Algo:    0x%02X -> %s", cmd->alg, hab_getAlgorithmStr(cmd->alg));

@@ -13,6 +13,7 @@
 #define LPSPI_VER_ID_MIN_BF               16,  8
 #define LPSPI_VER_ID_FEAT_BF               0, 16
 
+
 /* LPSPI Parameter Register */
 #define LPSPI_PARAM_OFFS                  0x004
 
@@ -20,8 +21,10 @@
 #define LPSPI_PARAM_RXFIFO_BF              8,  8
 #define LPSPI_PARAM_TXFIFO_BF              1,  8
 
+
 /* LPSPI Control Register */
 #define LPSPI_CTRL_REG_OFFS               0x010
+
 #define LPSPI_CTRL_RST_RX_FIFO_BF          9,  1
 #define LPSPI_CTRL_RST_TX_FIFO_BF          8,  1
 #define LPSPI_CTRL_DBG_ENA_BF              3,  1
@@ -88,7 +91,7 @@
 #define SPI_CONF_SCLK_PHA_BF               0,  4
 
 
-/* LPSPI Config Register 0 */
+/* LPSPI Config Register 1 */
 #define LPSPI_CONF1_REG_OFFS              0x024
 
 #define LPSPI_CONF1_PCS_CFG_BF            27,  1

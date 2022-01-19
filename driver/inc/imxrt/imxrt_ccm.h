@@ -35,9 +35,9 @@
 #define CCM_ANALOG_PLL_USB1_CLR_OFFS     0x018 /*!<  */
 #define CCM_ANALOG_PLL_USB1_TOG_OFFS     0x01C /*!<  */
    
-#define USB1_PLL_POWER                   12, 1
-#define USB1_PLL_EN_USB_CLKS              6, 1
-#define USB1_PLL_DIV_SELECT               1, 1
+#define USB1_PLL_POWER_BF                12, 1
+#define USB1_PLL_EN_USB_CLKS_BF           6, 1
+#define USB1_PLL_DIV_SELECT_BF            1, 1
    
    
 #define CCM_ANALOG_PLL_USB2_OFFS         0x020 /*!<  */
@@ -45,9 +45,9 @@
 #define CCM_ANALOG_PLL_USB2_CLR_OFFS     0x028 /*!<  */
 #define CCM_ANALOG_PLL_USB2_TOG_OFFS     0x02C /*!<  */
    
-#define USB2_PLL_POWER                   12, 1
-#define USB2_PLL_EN_USB_CLKS              6, 1
-#define USB2_PLL_DIV_SELECT               1, 1
+#define USB2_PLL_POWER_BF                12, 1
+#define USB2_PLL_EN_USB_CLKS_BF           6, 1
+#define USB2_PLL_DIV_SELECT_BF            1, 1
    
    
 #define CCM_ANALOG_PLL_SYS_OFFS          0x030 /*!<  */
@@ -55,26 +55,26 @@
 #define CCM_ANALOG_PLL_SYS_CLR_OFFS      0x038 /*!<  */
 #define CCM_ANALOG_PLL_SYS_TOG_OFFS      0x03C /*!<  */
    
-#define SYS_PLL_PFD_OFFSET_EN            18, 1
-#define SYS_PLL_POWERDOWN                12, 1
-#define SYS_PLL_DIV_SELECT                0, 1
+#define SYS_PLL_PFD_OFFSET_EN_BF         18, 1
+#define SYS_PLL_POWERDOWN_BF             12, 1
+#define SYS_PLL_DIV_SELECT_BF             0, 1
    
    
 #define CCM_ANALOG_PLL_SYS_SS_OFFS       0x040 /*!<  */
    
-#define SYS_PLL_SS_STOP                  16, 16
-#define SYS_PLL_SS_ENABLE                15,  1
-#define SYS_PLL_SS_STEP                   0, 15
+#define SYS_PLL_SS_STOP_BF               16, 16
+#define SYS_PLL_SS_ENABLE_BF             15,  1
+#define SYS_PLL_SS_STEP_BF                0, 15
    
    
 #define CCM_ANALOG_PLL_SYS_NUM_OFFS      0x050 /*!<  */
    
-#define SYS_PLL_NUM                       0, 30
+#define SYS_PLL_NUM_BF                    0, 30
    
    
 #define CCM_ANALOG_PLL_SYS_DENOM_OFFS    0x060 /*!<  */
    
-#define SYS_PLL_DENOM                     0, 30
+#define SYS_PLL_DENOM_BF                  0, 30
    
    
 #define CCM_ANALOG_PLL_AUDIO_OFFS        0x070 /*!<  */
@@ -82,7 +82,7 @@
 #define CCM_ANALOG_PLL_AUDIO_CLR_OFFS    0x078 /*!<  */
 #define CCM_ANALOG_PLL_AUDIO_TOG_OFFS    0x07C /*!<  */
    
-#define AUDIO_PLL_POST_DIV_SELECT        19, 2
+#define AUDIO_PLL_POST_DIV_SELECT_BF     19, 2
    
 #if !defined(__ASSEMBLER__)
    enum
@@ -93,18 +93,18 @@
    };
 #endif /* !defined(__ASSEMBLER__) */
    
-#define AUDIO_PLL_POWERDOWN              12, 1
-#define AUDIO_PLL_DIV_SELECT              0, 7
+#define AUDIO_PLL_POWERDOWN_BF           12, 1
+#define AUDIO_PLL_DIV_SELECT_BF           0, 7
    
    
 #define CCM_ANALOG_PLL_AUDIO_NUM_OFFS    0x080 /*!<  */
    
-#define AUDIO_PLL_NUM                     0, 30
+#define AUDIO_PLL_NUM_BF                  0, 30
    
    
 #define CCM_ANALOG_PLL_AUDIO_DENOM_OFFS  0x090 /*!<  */
    
-#define AUDIO_PLL_DENOM                   0, 30
+#define AUDIO_PLL_DENOM_BF                0, 30
    
    
 #define CCM_ANALOG_PLL_VIDEO_OFFS        0x0A0 /*!<  */
@@ -112,20 +112,20 @@
 #define CCM_ANALOG_PLL_VIDEO_CLR_OFFS    0x0A8 /*!<  */
 #define CCM_ANALOG_PLL_VIDEO_TOG_OFFS    0x0AC /*!<  */
    
-#define VIDEO_PLL_SSC_EN                 21, 1
-#define VIDEO_PLL_POST_DIV_SELECT        19, 2
-#define VIDEO_PLL_POWERDOWN              12, 1
-#define VIDEO_PLL_DIV_SELECT              0, 7
+#define VIDEO_PLL_SSC_EN_BF              21, 1
+#define VIDEO_PLL_POST_DIV_SELECT_BF     19, 2
+#define VIDEO_PLL_POWERDOWN_BF           12, 1
+#define VIDEO_PLL_DIV_SELECT_BF           0, 7
    
    
 #define CCM_ANALOG_PLL_VIDEO_NUM_OFFS    0x0B0 /*!<  */
    
-#define VIDEO_PLL_NUM                     0, 30
+#define VIDEO_PLL_NUM_BF                  0, 30
    
    
 #define CCM_ANALOG_PLL_VIDEO_DENOM_OFFS  0x0C0 /*!<  */
    
-#define VIDEO_PLL_DENOM                   0, 30
+#define VIDEO_PLL_DENOM_BF                0, 30
    
    
 #define CCM_ANALOG_PLL_ENET_OFFS         0x0E0 /*!<  */
@@ -133,11 +133,11 @@
 #define CCM_ANALOG_PLL_ENET_CLR_OFFS     0x0E8 /*!<  */
 #define CCM_ANALOG_PLL_ENEt_TOG_OFFS     0x0EC /*!<  */
    
-#define ENET_PLL_ENABLE_100M             20, 1
-#define ENET_PLL_ENABLE_125M             19, 1
-#define ENET_PLL_PFD_OFFSET_EN           18, 1
-#define ENET_PLL_POWERDOWN               12, 1
-#define ENET_PLL_DIV_SELECT               0, 2
+#define ENET_PLL_ENABLE_100M_BF          20, 1
+#define ENET_PLL_ENABLE_125M_BF          19, 1
+#define ENET_PLL_PFD_OFFSET_EN_BF        18, 1
+#define ENET_PLL_POWERDOWN_BF            12, 1
+#define ENET_PLL_DIV_SELECT_BF            0, 2
    
    
 #define CCM_ANALOG_PLL_PFD_480_OFFS      0x0F0 /*!<  */
@@ -145,21 +145,21 @@
 #define CCM_ANALOG_PLL_PFD_480_CLR_OFFS  0x0F8 /*!<  */
 #define CCM_ANALOG_PLL_PFD_480_TOG_OFFS  0x0FC /*!<  */
    
-#define PFD_480_PFD3_CLKGATE             31, 1
-#define PFD_480_PFD3_STABLE              30, 1
-#define PFD_480_PFD3_FRAC                24, 6
+#define PFD_480_PFD3_CLKGATE_BF          31, 1
+#define PFD_480_PFD3_STABLE_BF           30, 1
+#define PFD_480_PFD3_FRAC_BF             24, 6
    
-#define PFD_480_PFD2_CLKGATE             23, 1
-#define PFD_480_PFD2_STABLE              22, 1
-#define PFD_480_PFD2_FRAC                16, 6
+#define PFD_480_PFD2_CLKGATE_BF          23, 1
+#define PFD_480_PFD2_STABLE_BF           22, 1
+#define PFD_480_PFD2_FRAC_BF             16, 6
    
-#define PFD_480_PFD1_CLKGATE             15, 1
-#define PFD_480_PFD1_STABLE              14, 1
-#define PFD_480_PFD1_FRAC                 8, 6
+#define PFD_480_PFD1_CLKGATE_BF          15, 1
+#define PFD_480_PFD1_STABLE_BF           14, 1
+#define PFD_480_PFD1_FRAC_BF              8, 6
    
-#define PFD_480_PFD0_CLKGATE              7, 1
-#define PFD_480_PFD0_STABLE               6, 1
-#define PFD_480_PFD0_FRAC                 0, 6
+#define PFD_480_PFD0_CLKGATE_BF           7, 1
+#define PFD_480_PFD0_STABLE_BF            6, 1
+#define PFD_480_PFD0_FRAC_BF              0, 6
    
 
 #define CCM_ANALOG_PLL_PFD0_480_OFFS     0x0F0 /*!<  */
@@ -182,9 +182,9 @@
 #define CCM_ANALOG_PLL_PFD3_480_CLR_OFFS 0x0FB /*!<  */
 #define CCM_ANALOG_PLL_PFD3_480_TOG_OFFS 0x0FF /*!<  */
    
-#define PFD_480_PFDn_CLKGATE              7, 1
-#define PFD_480_PFDn_STABLE               6, 1
-#define PFD_480_PFDn_FRAC                 0, 6
+#define PFD_480_PFDn_CLKGATE_BF           7, 1
+#define PFD_480_PFDn_STABLE_BF            6, 1
+#define PFD_480_PFDn_FRAC_BF              0, 6
    
    
 #define CCM_ANALOG_PLL_PFD_528_OFFS      0x100 /*!<  */
@@ -192,21 +192,21 @@
 #define CCM_ANALOG_PLL_PFD_528_CLR_OFFS  0x108 /*!<  */
 #define CCM_ANALOG_PLL_PFD_528_TOG_OFFS  0x10C /*!<  */
    
-#define PFD_528_PFD3_CLKGATE             31, 1
-#define PFD_528_PFD3_STABLE              30, 1
-#define PFD_528_PFD3_FRAC                24, 6
+#define PFD_528_PFD3_CLKGATE_BF          31, 1
+#define PFD_528_PFD3_STABLE_BF           30, 1
+#define PFD_528_PFD3_FRAC_BF             24, 6
 
-#define PFD_528_PFD2_CLKGATE             23, 1
-#define PFD_528_PFD2_STABLE              22, 1
-#define PFD_528_PFD2_FRAC                16, 6
+#define PFD_528_PFD2_CLKGATE_BF          23, 1
+#define PFD_528_PFD2_STABLE_BF           22, 1
+#define PFD_528_PFD2_FRAC_BF             16, 6
    
-#define PFD_528_PFD1_CLKGATE             15, 1
-#define PFD_528_PFD1_STABLE              14, 1
-#define PFD_528_PFD1_FRAC                 8, 6
+#define PFD_528_PFD1_CLKGATE_BF          15, 1
+#define PFD_528_PFD1_STABLE_BF           14, 1
+#define PFD_528_PFD1_FRAC_BF              8, 6
    
-#define PFD_528_PFD0_CLKGATE              7, 1
-#define PFD_528_PFD0_STABLE               6, 1
-#define PFD_528_PFD0_FRAC                 0, 6
+#define PFD_528_PFD0_CLKGATE_BF           7, 1
+#define PFD_528_PFD0_STABLE_BF            6, 1
+#define PFD_528_PFD0_FRAC_BF              0, 6
    
    
 #define CCM_ANALOG_PLL_PFD0_528_OFFS     0x100 /*!<  */
@@ -233,27 +233,27 @@
 /* CCM Control Register */
 #define CCM_CCR_OFFS                0x000 /*!<  */
 
-#define CCM_CCR_RBC_ENA             27, 1
-#define CCM_CCR_REG_BYPASS_COUNT    21, 6
-#define CCM_CCR_COSC_ENA            12, 1
-#define CCM_CCR_OSC_COUNT            0, 8
+#define CCM_CCR_RBC_ENA_BF          27, 1
+#define CCM_CCR_REG_BYPASS_COUNT_BF 21, 6
+#define CCM_CCR_COSC_ENA_BF         12, 1
+#define CCM_CCR_OSC_COUNT_BF         0, 8
 
 /* CCM Status Register */
 #define CCM_CSR_OFFS                0x008 /*!<  */
 
-#define CCM_CSR_COSC_READY           5, 1
-#define CCM_CSR_CAMP2_READY          3, 1
-#define CCM_CSR_REF_ENA_B            0, 1
+#define CCM_CSR_COSC_READY_BF        5, 1
+#define CCM_CSR_CAMP2_READY_BF       3, 1
+#define CCM_CSR_REF_ENA_B_BF         0, 1
 
 /* CCM Clock Switcher Register */
 #define CCM_CCSR_OFFS               0x00C /*!<  */
 
-#define CCM_CCSR_PLL3_SW_CLK_SEL     0, 1
+#define CCM_CCSR_PLL3_SW_CLK_SEL_BF  0, 1
 
 /* CCM ARM Clock Root Register */
 #define CCM_CACRR_OFFS              0x010 /*!<  */
 
-#define CCM_CACRR_ARM_PODF           0, 3
+#define CCM_CACRR_ARM_PODF_BF        0, 3
 
 /* CCM Bus Clock Divider Register */
 #define CCM_CBCDR_OFFS              0x014 /*!<  */
@@ -302,6 +302,12 @@
 #define CCM_CDCDR_OFFS              0x030 /*!<  */
 /* CCM Serial Clock Divider Register 2 */
 #define CCM_CSCDR2_OFFS             0x038 /*!<  */
+
+#define CCM_CSCDR2_LPI2C_CLK_PODF_BF    19, 6
+#define CCM_CSCDR2_LPI2C_CLK_SEL_BF     18, 1
+#define CCM_CSCDR2_LCDIF_PRE_CLK_SEL_BF 15, 3
+#define CCM_CSCDR2_LCDIF_PRED_BF        12, 3
+
 /* CCM Serial Clock Divider Register 3 */
 #define CCM_CSCDR3_OFFS             0x03C /*!<  */
 /* CCM Divider Handshake In-Progress Register */
@@ -387,6 +393,9 @@ enum
 #define CCM_CCGR2_OFFS                   0x070 /*!<  */
 
 #define OCOTP_CTRL_CLK_ENA_BF            12, 2
+#define LPI2C3_CLK_ENA_BF                10, 2
+#define LPI2C2_CLK_ENA_BF                 8, 2
+#define LPI2C1_CLK_ENA_BF                 6, 2
 #define IOMUXC_SNVS_CLK_ENA_BF            4, 2
 #define OCRAM_EXSC_CLK_ENA_BF             0, 2
 
@@ -424,6 +433,8 @@ enum
 
 /* CCM Clock Gating Register 6 */
 #define CCM_CCGR6_OFFS                   0x080 /*!<  */
+
+#define LPI2C4_CLK_ENA_BF                24, 2
 
 /* CCM Clock Gating Register 7 */
 #define CCM_CCGR8_OFFS                   0x084 /*!<  */

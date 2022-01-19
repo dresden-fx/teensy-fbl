@@ -119,10 +119,6 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += $(SERVDIR)/libc
   SRC_EXE       += libc.c
 
-  INCDIR        += $(SERVDIR)/systimer
-  SRCDIR        += $(SERVDIR)/systimer
-  SRC_EXE       += systimer.c
-
   INCDIR        += $(CMNDIR)/generic
   SRCDIR        += $(CMNDIR)/generic
   SRC_EXE       += cpu_asm.S

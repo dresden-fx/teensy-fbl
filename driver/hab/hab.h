@@ -4,6 +4,7 @@
 /* This file is derived from the document "High Assurance Boot Version 4
  * Application Programming Interface Reference Manual".
  */
+
 #define HAB_HDR_BYTES 4  /* cannot use sizeof(hab_hdr_t) in preprocessor */
 
 
@@ -22,7 +23,7 @@ typedef enum
 
 
 #define HAB_MAJOR_VERSION  4    /*!< Major version of this HAB release */
-#define HAB_MINOR_VERSION  0    /*!< Minor version of this HAB release */
+#define HAB_MINOR_VERSION  1    /*!< Minor version of this HAB release */
 
 #define HAB_MAJ_BF         4, 4
 #define HAB_MIN_BF         0, 4
@@ -278,6 +279,12 @@ typedef enum
   HAB_ALG_BLOB = 0x71,        /**< SHW-specific key wrap algorithm */
 }T_HAB_ALG, hab_algorithm_t;
 
+
+typedef enum
+{
+  HAB_KEY_PUBLIC = 0xe1,      /**< Public key type: data present */
+  HAB_KEY_HASH = 0xee,        /**< Any key type: hash only */
+}T_HAB_KEY;
 
 /* Assertion types. */
 typedef enum
@@ -1173,12 +1180,59 @@ typedef struct
   uint32 __align;
 }T_HAB_BOOT_DATA;
 
+
 typedef struct
 {
    /* Header with tag = HAB_TAG_CSF, length and HAB version fields */
    T_HAB_HDR hdr;
    T_HAB_CMD cmds[0];
 }T_HAB_CSF;
+
+
+typedef struct
+{
+   /* Header with tag = HAB_KEY_PUBLIC, length field and param equal to ALG_PKCS1 */
+   T_HAB_HDR hdr;
+   uint8  reserved[3];
+   uint8  caFlag;
+   uint16 keySize;
+   uint16 expSize;
+   uint8  pubKey[0];
+}T_HAB_SRK;
+
+
+typedef struct
+{
+   /* Header with tag = HAB_TAG_SRK, length and HAB version fields */
+   T_HAB_HDR hdr;
+   uint8 srkData[0]; /* Minimum 1 SRK, up to 4 determined by size */
+}T_HAB_SRK_TBL;
+
+
+typedef union
+{
+  uint8  bytes[32];
+  uint32 words[8];
+}T_SRK_DIGEST;
+
+
+typedef struct
+{
+  void*  addr;        /*!< Address of the SRK */
+  uint16 size;        /*!< Size of the SRK including CRT header */
+  uint16 keySize;     /*!< Size of the modulus */
+  uint16 expSize;     /*!< Size of the exponent */
+  uint8  reserved[2];
+}T_SRK_INFO;
+
+
+typedef struct
+{
+  uint16 totalSize;
+  uint8  numSrks;
+  uint8 caFlag;
+  T_SRK_INFO srkInfos[4];
+}T_SRK_TBL_INFO;
 
 
 #define __ivt_sect __attribute__((section(".ivt")))

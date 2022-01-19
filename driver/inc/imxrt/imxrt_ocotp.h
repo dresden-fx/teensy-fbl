@@ -45,7 +45,7 @@
 /* Lock fuses */
 #define OCOTP_LOCK_FUSE_OFFS          0x400
 
-#define LOCK_FUSE_FIELD_RETURN_BF     28, 4
+#define LOCK_FUSE_FIELD_RETURN_BF     31, 1
 #define LOCK_FUSE_GP3_OP_LOCK_BF      27, 1
 #define LOCK_FUSE_GP3_WR_LOCK_BF      26, 1
 #define LOCK_FUSE_GP3_LOCK_BF         26, 2
