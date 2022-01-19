@@ -196,4 +196,4 @@ HEX_OPTS  += __out__/imxrt/image_exp.hex
 postlink: bin
 	@perl -w $(UTILDIR)/hab-sign/genSignCfg.pl $(SIGN_OPTS)
 	@perl -w $(UTILDIR)/patchCrc/patchCrc.pl $(CRC_OPTS)
-#	@objcopy $(HEX_OPTS)
+	@objcopy $(HEX_OPTS)

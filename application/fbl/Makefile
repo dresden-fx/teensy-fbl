@@ -61,6 +61,8 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += $(DRVDIR)/hab
   SRC_EXE       += hab_api.c
   SRC_EXE       += hab_info.c
+  SRC_EXE       += hab_csf.c
+  SRC_EXE       += hab_security.c
 
   INCDIR        += $(SERVDIR)/swinfo
   SRCDIR        += $(SERVDIR)/swinfo
@@ -75,9 +77,9 @@ ifeq ($(PLATFORM), IMXRT)
   SRC_EXE       += ocotp_info.c
 
   # DCP
-#  INCDIR        += $(DRVDIR)/dcp
-#  SRCDIR        += $(DRVDIR)/dcp
-#  SRC_EXE       += dcp.c
+  INCDIR        += $(DRVDIR)/dcp
+  SRCDIR        += $(DRVDIR)/dcp
+  SRC_EXE       += dcp.c
 
   # ROM API
   INCDIR        += $(DRVDIR)/rom_api        # rom_api.h
