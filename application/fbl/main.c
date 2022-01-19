@@ -10,6 +10,7 @@
 #include "cpu_irq.h"
 #include "cmdl.h"
 #include "trace_pub.h"
+#include "bmgr.h"
 #include "arm_nvic.h"
 #include "arm_sys_timer.h"
 
@@ -89,6 +90,12 @@ int main(void)
 
   /* Initialize commandline */
   cmdl_init();
+
+  /* Initialize boot control protocol */
+  bcp_init();
+
+  /* Initialize boot manager */
+  bmgr_init();
 
   while(1)
   {

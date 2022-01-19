@@ -31,10 +31,10 @@ ifeq ($(PLATFORM), IMXRT)
 
   SRC_EXE       += main.c
   SRC_EXE       += cmdl.c
-#  SRC_EXE       += noinit.c
-#  SRC_EXE       += bmgr.c
-#  SRC_EXE       += bcp.c
-#  SRC_EXE       += fbl.c
+  SRC_EXE       += noinit.c
+  SRC_EXE       += bmgr.c
+  SRC_EXE       += bcp.c
+  SRC_EXE       += fbl.c
 
 
   INCDIR        += $(DRVDIR)/../demo/startup
@@ -61,6 +61,7 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += $(DRVDIR)/hab
   SRC_EXE       += hab_api.c
   SRC_EXE       += hab_info.c
+  SRC_EXE       += hab_ivt.c
   SRC_EXE       += hab_csf.c
   SRC_EXE       += hab_security.c
 
@@ -132,6 +133,20 @@ ifeq ($(PLATFORM), IMXRT)
   SRCDIR        += $(SERVDIR)/trace
   SRC_EXE       += trace_core.c
   SRC_EXE       += trace_flex.c
+
+  # External Flash Driver
+  INCDIR        += $(DRVDIR)/ext_flash
+  SRCDIR        += $(DRVDIR)/ext_flash
+  SRC_EXE       += ext_flash.c
+
+  INCDIR        += $(SERVDIR)/dlcf
+  SRCDIR        += $(SERVDIR)/dlcf
+  SRC_EXE       += dlcf.c
+  SRC_EXE       += dlcf_uart.c
+  
+  INCDIR        += $(SERVDIR)/crc
+  SRCDIR        += $(SERVDIR)/crc
+  SRC_EXE       += crc16.c
 
   INCDIR        += $(CMNDIR)/generic
   SRCDIR        += $(CMNDIR)/generic

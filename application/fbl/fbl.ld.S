@@ -32,19 +32,19 @@ SECTIONS
   /* Set location counter to address zero  */
   . = 0;
   /* Remember image start */
-  __image_start = ORIGIN(FBL_CODE);
+  __image_start = ORIGIN(EXT_FLASH);
 
   /*
    * IMXRT needs a flash configuration at the beginning of external flash
    */
   .flash_cfg :
   {
-    __fls_cfg_start = .;
     KEEP(*(.flash_cfg))
-    __fls_cfg_end = .;
     FILL(0xFF)
   } > EXT_FLASH
-  
+  __fls_cfg_start = (SIZEOF(.flash_cfg) > 0) ? (ADDR(.flash_cfg)) : 0;
+  __fls_cfg_end = (SIZEOF(.flash_cfg) > 0) ? (ADDR(.flash_cfg) + SIZEOF(.flash_cfg) - 1) : 0;
+
 
   .text.sw_info :
   {
