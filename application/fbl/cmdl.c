@@ -377,7 +377,7 @@ static int cmdl_wrMacCmd(const char* argStr)
 
 static int cmdl_wrSrkHashCmd(const char* argStr)
 {
-//  hab_provisionSrkHash();
+  hab_provisionSrkHash();
   return 0;
 }
 
