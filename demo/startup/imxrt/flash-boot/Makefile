@@ -169,31 +169,6 @@ help:
 	
 endif # PLATFORM
 
-include $(MKDIR)/generic.mk
-include $(MKDIR)/Makefile.version
-
-SIGN_OPTS  = --image-type=FLS
-SIGN_OPTS += --ivt-offs=0x1000                                 # Default IVT offset
-SIGN_OPTS += --input-file=__out__/imxrt/boot.bin               # Input binary image to be signed
-SIGN_OPTS += --crc-offs=0x208                                  # Offset at which the CRC is patched
-SIGN_OPTS += --srk-idx=0                                       # Super Root Key to use for signing
-
-SIGN_OPTS += --srk-tbl=SRK_table.bin
-SIGN_OPTS += --noca-cert=SRK1_sha256_2048_65537_v3_usr_crt.pem
-#SIGN_OPTS += --verbose
-
-CRC_OPTS  = --crc-offs=0x208
-CRC_OPTS += --input-file=__out__/imxrt/image_exp.bin
-CRC_OPTS += --output-file=__out__/imxrt/image_exp.fbl
-
-HEX_OPTS  += -I binary
-HEX_OPTS  += -O ihex
-HEX_OPTS  += --set-start 0x60000400
-HEX_OPTS  += --change-address 0x60000000
-HEX_OPTS  += __out__/imxrt/image_exp.fbl
-HEX_OPTS  += __out__/imxrt/image_exp.hex
-
-postlink: bin
-	@perl -w $(UTILDIR)/hab-sign/genSignCfg.pl $(SIGN_OPTS)
-	@perl -w $(UTILDIR)/patchCrc/patchCrc.pl $(CRC_OPTS)
-	@objcopy $(HEX_OPTS)
+include  $(MKDIR)/generic.mk
+include  $(MKDIR)/Makefile.version
+-include $(MKDIR)/Makefile.postlink
