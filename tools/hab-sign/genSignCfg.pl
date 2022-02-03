@@ -7,7 +7,6 @@
 use strict;
 use File::Basename;
 use Cwd qw(cwd);
-use Switch;
 
 # Create command arguments from arguments given to this scipt and undefine
 # the script's arguments
@@ -106,18 +105,45 @@ sub hab_getTagStr
   my $tag = $_[0];
 
   my $tagStr;  
-  switch($tag)
+  if($HAB_TAG_IVT == $tag)
   {
-  case ($HAB_TAG_IVT) {$tagStr = "IVT";}
-  case ($HAB_TAG_DCD) {$tagStr = "DCD";}
-  case ($HAB_TAG_CSF) {$tagStr = "CSF";}
-  case ($HAB_TAG_CRT) {$tagStr = "CRT";}
-  case ($HAB_TAG_SIG) {$tagStr = "SIG";}
-  case ($HAB_TAG_EVT) {$tagStr = "EVT";}
-  case ($HAB_TAG_RVT) {$tagStr = "RVT";}
-  case ($HAB_TAG_WRP) {$tagStr = "WRP";}
-  case ($HAB_TAG_MAC) {$tagStr = "MAC";}
-  else                {$tagStr = "Unknown!";}
+    $tagStr = "IVT";
+  }
+  elsif($HAB_TAG_DCD == $tag)
+  {
+    $tagStr = "DCD";
+  }
+  elsif($HAB_TAG_CSF == $tag)
+  {
+    $tagStr = "CSF";
+  }
+  elsif($HAB_TAG_CRT == $tag)
+  {
+    $tagStr = "CRT";
+  }
+  elsif($HAB_TAG_SIG == $tag)
+  {
+    $tagStr = "SIG";
+  }
+  elsif($HAB_TAG_EVT == $tag)
+  {
+    $tagStr = "EVT";
+  }
+  elsif($HAB_TAG_RVT == $tag)
+  {
+    $tagStr = "RVT";
+  }
+  elsif($HAB_TAG_WRP == $tag)
+  {
+    $tagStr = "WRP";
+  }
+  elsif($HAB_TAG_MAC == $tag)
+  {
+    $tagStr = "MAC";
+  }
+  else
+  {
+    $tagStr = "Unknown!";
   }
   return $tagStr;
 }
@@ -135,17 +161,41 @@ sub hab_getCmdStr
   my $cmdTag = $_[0];
 
   my $cmdStr;
-  switch($cmdTag)
+  if($HAB_CMD_SET_ITEM == $cmdTag)
   {
-  case ($HAB_CMD_SET_ITEM)  {$cmdStr = "SET_ITEM";}
-  case ($HAB_CMD_INS_KEY)   {$cmdStr = "INS_KEY";}
-  case ($HAB_CMD_AUTH_DATA) {$cmdStr = "AUTH_DATA";}
-  case ($HAB_CMD_WRT_DATA)  {$cmdStr = "WRT_DATA";}
-  case ($HAB_CMD_CHK_DATA)  {$cmdStr = "CHK_DATA";}
-  case ($HAB_CMD_NOP)       {$cmdStr = "NOP";}
-  case ($HAB_CMD_INIT)      {$cmdStr = "INIT";}
-  case ($HAB_CMD_UNLOCK)    {$cmdStr = "UNLOCK";}
-  else                      {$cmdStr = "Unknown!";}
+    $cmdStr = "SET_ITEM";
+  }
+  elsif($HAB_CMD_INS_KEY == $cmdTag)
+  {
+    $cmdStr = "INS_KEY";
+  }
+  elsif($HAB_CMD_AUTH_DATA == $cmdTag)
+  {
+    $cmdStr = "AUTH_DATA";
+  }
+  elsif($HAB_CMD_WRT_DATA == $cmdTag)
+  {
+    $cmdStr = "WRT_DATA";
+  }
+  elsif($HAB_CMD_CHK_DATA == $cmdTag)
+  {
+    $cmdStr = "CHK_DATA";
+  }
+  elsif($HAB_CMD_NOP == $cmdTag)
+  {
+    $cmdStr = "NOP";
+  }
+  elsif($HAB_CMD_INIT == $cmdTag)
+  {
+    $cmdStr = "INIT";
+  }
+  elsif($HAB_CMD_UNLOCK == $cmdTag)
+  {
+    $cmdStr = "UNLOCK";
+  }
+  else
+  {
+    $cmdStr = "Unknown!";
   }
   return $cmdStr;
 }
@@ -163,23 +213,65 @@ sub hab_getEngineStr
   my $engTag = $_[0];
 
   my $engineStr;
-  switch($engTag)
+  if($HAB_ENG_ANY == $engTag)
   {
-  case ($HAB_ENG_ANY)    {$engineStr = "ANY";}
-  case ($HAB_ENG_SCC)    {$engineStr = "SCC";}
-  case ($HAB_ENG_RTIC)   {$engineStr = "RTIC";}
-  case ($HAB_ENG_SAHARA) {$engineStr = "SAHARA";}
-  case ($HAB_ENG_CSU)    {$engineStr = "CSU";}
-  case ($HAB_ENG_SRTC)   {$engineStr = "SRTC";}
-  case ($HAB_ENG_DCP)    {$engineStr = "DCP";}
-  case ($HAB_ENG_CAAM)   {$engineStr = "CAAM";}
-  case ($HAB_ENG_SNVS)   {$engineStr = "SNVS";}
-  case ($HAB_ENG_OCOTP)  {$engineStr = "OTOCP";}
-  case ($HAB_ENG_DTCP)   {$engineStr = "DTCP";}
-  case ($HAB_ENG_ROM)    {$engineStr = "ROM";}
-  case ($HAB_ENG_HDCP)   {$engineStr = "HDCP";}
-  case ($HAB_ENG_SW)     {$engineStr = "SW";}
-  else                   {$engineStr = "Unknown!";}
+    $engineStr = "ANY";
+  }
+  elsif($HAB_ENG_SCC == $engTag)
+  {
+    $engineStr = "SCC";
+  }
+  elsif($HAB_ENG_RTIC == $engTag)
+  {
+    $engineStr = "RTIC";
+  }
+  elsif($HAB_ENG_SAHARA == $engTag)
+  {
+    $engineStr = "SAHARA";
+  }
+  elsif($HAB_ENG_CSU == $engTag)
+  {
+    $engineStr = "CSU";
+  }
+  elsif($HAB_ENG_SRTC == $engTag)
+  {
+    $engineStr = "SRTC";
+  }
+  elsif($HAB_ENG_DCP == $engTag)
+  {
+    $engineStr = "DCP";
+  }
+  elsif($HAB_ENG_CAAM == $engTag)
+  {
+    $engineStr = "CAAM";
+  }
+  elsif($HAB_ENG_SNVS == $engTag)
+  {
+    $engineStr = "SNVS";
+  }
+  elsif($HAB_ENG_OCOTP == $engTag)
+  {
+    $engineStr = "OTOCP";
+  }
+  elsif($HAB_ENG_DTCP == $engTag)
+  {
+    $engineStr = "DTCP";
+  }
+  elsif($HAB_ENG_ROM == $engTag)
+  {
+    $engineStr = "ROM";
+  }
+  elsif($HAB_ENG_HDCP == $engTag)
+  {
+    $engineStr = "HDCP";
+  }
+  elsif($HAB_ENG_SW == $engTag)
+  {
+    $engineStr = "SW";
+  }
+  else
+  {
+    $engineStr = "Unknown!";
   }
   return $engineStr;
 }
@@ -197,14 +289,29 @@ sub hab_getProtocolStr
   my $pclTag = $_[0];
 
   my $protocolStr;
-  switch($pclTag)
+  if($HAB_PCL_SRK == $pclTag)
   {
-  case ($HAB_PCL_SRK)  {$protocolStr = "SRK";}
-  case ($HAB_PCL_X509) {$protocolStr = "X509";}
-  case ($HAB_PCL_CMS)  {$protocolStr = "CMS";}
-  case ($HAB_PCL_BLOB) {$protocolStr = "BLOB";}
-  case ($HAB_PCL_AEAD) {$protocolStr = "AEAD";}
-  else                 {$protocolStr = "Unknown!";}
+    $protocolStr = "SRK";
+  }
+  elsif($HAB_PCL_X509 == $pclTag)
+  {
+    $protocolStr = "X509";
+  }
+  elsif($HAB_PCL_CMS == $pclTag)
+  {
+    $protocolStr = "CMS";
+  }
+  elsif($HAB_PCL_BLOB == $pclTag)
+  {
+    $protocolStr = "BLOB";
+  }
+  elsif($HAB_PCL_AEAD == $pclTag)
+  {
+    $protocolStr = "AEAD";
+  }
+  else
+  {
+    $protocolStr = "Unknown!";
   }
   return $protocolStr;
 }
@@ -222,24 +329,69 @@ sub hab_getAlgorithmStr
   my $algTag = $_[0];
 
   my $algorithmStr;
-  switch($algTag)
+  if($HAB_ALG_ANY == $algTag)
   {
-  case ($HAB_ALG_ANY)      {$algorithmStr = "ANY";}
-  case ($HAB_ALG_HASH)     {$algorithmStr = "HASH";}
-  case ($HAB_ALG_SIG)      {$algorithmStr = "SIG";}
-  case ($HAB_ALG_FF)       {$algorithmStr = "FF";}
-  case ($HAB_ALG_EC)       {$algorithmStr = "ECC";}
-  case ($HAB_ALG_CIPHER)   {$algorithmStr = "CIPHER";}
-  case ($HAB_ALG_MODE)     {$algorithmStr = "MODE";}
-  case ($HAB_ALG_WRAP)     {$algorithmStr = "WRAP";}
-  case ($HAB_ALG_SHA1)     {$algorithmStr = "SHA1";}
-  case ($HAB_ALG_SHA256)   {$algorithmStr = "SHA256";}
-  case ($HAB_ALG_SHA512)   {$algorithmStr = "SHA512";}
-  case ($HAB_ALG_PKCS1)    {$algorithmStr = "PKCS1";}
-  case ($HAB_ALG_AES)      {$algorithmStr = "AES";}
-  case ($HAB_ALG_CCM_MODE) {$algorithmStr = "CCM";}
-  case ($HAB_ALG_BLOB)     {$algorithmStr = "BLOB";}
-  else                     {$algorithmStr = "Unknown!";}
+    $algorithmStr = "ANY";
+  }
+  elsif($HAB_ALG_HASH == $algTag)
+  {
+    $algorithmStr = "HASH";
+  }
+  elsif($HAB_ALG_SIG == $algTag)
+  {
+    $algorithmStr = "SIG";
+  }
+  elsif($HAB_ALG_FF == $algTag)
+  {
+    $algorithmStr = "FF";
+  }
+  elsif($HAB_ALG_EC == $algTag)
+  {
+    $algorithmStr = "ECC";
+  }
+  elsif($HAB_ALG_CIPHER == $algTag)
+  {
+    $algorithmStr = "CIPHER";
+  }
+  elsif($HAB_ALG_MODE == $algTag)
+  {
+    $algorithmStr = "MODE";
+  }
+  elsif($HAB_ALG_WRAP == $algTag)
+  {
+    $algorithmStr = "WRAP";
+  }
+  elsif($HAB_ALG_SHA1 == $algTag)
+  {
+    $algorithmStr = "SHA1";
+  }
+  elsif($HAB_ALG_SHA256 == $algTag)
+  {
+    $algorithmStr = "SHA256";
+  }
+  elsif($HAB_ALG_SHA512 == $algTag)
+  {
+    $algorithmStr = "SHA512";
+  }
+  elsif($HAB_ALG_PKCS1 == $algTag)
+  {
+    $algorithmStr = "PKCS1";
+  }
+  elsif($HAB_ALG_AES == $algTag)
+  {
+    $algorithmStr = "AES";
+  }
+  elsif($HAB_ALG_CCM_MODE == $algTag)
+  {
+    $algorithmStr = "CCM";
+  }
+  elsif($HAB_ALG_BLOB == $algTag)
+  {
+    $algorithmStr = "BLOB";
+  }
+  else
+  {
+    $algorithmStr = "Unknown!";
   }
   return $algorithmStr;
 }
@@ -257,11 +409,17 @@ sub hab_getKeyTypeStr
   my $keyTag = $_[0];
 
   my $keyTypeStr;
-  switch($keyTag)
+  if($HAB_KEY_PUBLIC == $keyTag)
   {
-  case ($HAB_KEY_PUBLIC) {$keyTypeStr = "PUBKEY";}
-  case ($HAB_KEY_HASH)   {$keyTypeStr = "KEYHASH";}
-  else                   {$keyTypeStr = "Unknown!";}
+    $keyTypeStr = "PUBKEY";
+  }
+  elsif($HAB_KEY_HASH == $keyTag)
+  {
+    $keyTypeStr = "KEYHASH";
+  }
+  else
+  {
+    $keyTypeStr = "Unknown!";
   }
   return $keyTypeStr;
 }
@@ -512,12 +670,21 @@ sub hab_parseCmd
   printf("  Len: 0x%04X -> %d Bytes\n", $cmd->{"size"}, $cmd->{"size"});
   printf("  Par: 0x%02X", $cmd->{"par"});
   
-  switch($cmd->{"tag"})
+  if($HAB_CMD_INS_KEY == $cmd->{"tag"})
   {
-  case ($HAB_CMD_INS_KEY)   {hab_parseInsKeyCmd($buf, $offs, $cmd);}
-  case ($HAB_CMD_AUTH_DATA) {hab_parseAuthDataCmd($buf, $offs, $cmd);}
-  case ($HAB_CMD_UNLOCK)    {hab_parseUnlockCmd($buf, $offs, $cmd);}
-  else {;}
+    hab_parseInsKeyCmd($buf, $offs, $cmd);
+  }
+  elsif($HAB_CMD_AUTH_DATA == $cmd->{"tag"})
+  {
+    hab_parseAuthDataCmd($buf, $offs, $cmd);
+  }
+  elsif($HAB_CMD_UNLOCK == $cmd->{"tag"})
+  {
+    hab_parseUnlockCmd($buf, $offs, $cmd);
+  }
+  else
+  {
+    ;
   }
   printf("\n");
 }
@@ -827,6 +994,9 @@ sub getCwd
 
 sub signImage
 {
+  my $cstWorkDirPath;
+  my $cstBinDirPath;
+
   my $cwd;
   my @result;
   my $cstProc;
@@ -834,16 +1004,17 @@ sub signImage
   my $line;
   my $pid;
   my $dir;
-  
-  
+
+  ($cstBinDirPath, $cstWorkDirPath) = @_;
   $cwd = cwd();
   $dir = $cwd;
-#  print("CST-home: ".$ENV{'CST_HOME'}."\n");
-  chdir($ENV{'CST_HOME'}."/production") or die "Can't change directory: $!\n";
-  $cwd = cwd();
-  print("Executing CST-Tool from within ".$cwd."\n");
   
-  $pid = open($cstProc, "cst -i cst.conf -o csf.bin |");
+#  print("CST-home: ".$ENV{'CST_HOME'}."\n");
+  chdir($cstWorkDirPath) or die "Can't change directory: $!\n";
+  $cwd = cwd();
+  print("\nExecuting CST-Tool from within ".$cwd."\n");
+  
+  $pid = open($cstProc, $cstBinDirPath."/cst -i cst.conf -o csf.bin |");
 
   while($line = <$cstProc>)
   {
@@ -915,7 +1086,7 @@ sub makeHex
   
   ($srcPath, $srcImgFile, $dstImgFile, $entryAddr, $baseAddr) = @_;
   $cwd = cwd();
-  print("Executing objcpy from within ".$cwd."\n");
+  print("\nExecuting objcpy from within ".$cwd."\n");
   printf("  Entry:     0x%08X\n", $entryAddr);
   printf("  Base:      0x%08X\n", $baseAddr);
   $entryAddr -= $baseAddr;
@@ -1015,6 +1186,9 @@ my $helpMessage = <<"END_HELP";
                                     and the key must be in PKCS8 Format and the password 
                                     must be in the file <cst-dir>/keys/key_pass.txt
  --verbose                          Verbose output
+ --cst-home
+ --cst-work
+ --cst-bin
 END_HELP
 
 # The image type determines the following aspects of the image signing:
@@ -1053,13 +1227,17 @@ END_HELP
 
 # Define the script's main function
 # 
-sub genSignCfg
+sub main # genSignCfg
 {
   # Get arguments and argument count
   my @args = @_;
   my $argc = @args;
 
   my $i;
+  my $cstRootDirPath = $ENV{'CST_HOME'};
+  my $cstBinDirPath = $ENV{'CST_BIN'};
+  my $cstWorkDirName = "production";
+
   # Name and path of image to be signed
   my $srcImgName = "image.bin"; # default name
   my $srcImgPath;
@@ -1067,11 +1245,11 @@ sub genSignCfg
   # Name and path of image expanded
   my $expImgName = "image_exp.bin";
   my $expHexName = "image_exp.hex";
-  my $expImgPath = $ENV{'CST_HOME'}."/production/";
+  my $expImgPath = $cstRootDirPath."/".$cstWorkDirName."/";
 
   # Name and path of binary file used for signing
   my $dstImgName = "image_strip.bin";
-  my $dstImgPath = $ENV{'CST_HOME'}."/production/";
+  my $dstImgPath = $expImgPath;
 
   # Name of CST config file
   my $cstConf = "cst.conf";
@@ -1222,6 +1400,18 @@ sub genSignCfg
           exit(-1);
         }
       }
+      elsif($argStr =~ m/--cst-home=(.+)/)
+      {
+        $cstRootDirPath = $1;
+      }
+      elsif($argStr =~ m/--cst-bin=(.+)/)
+      {
+        $cstBinDirPath = $1;
+      }
+      elsif($argStr =~ m/--cst-work=(.+)/)
+      {
+        $cstWorkDirName = $1;
+      }
       elsif($argStr =~ m/--srk-tbl=(.+)/)
       {
         $srkTblFileName = $1;
@@ -1337,7 +1527,6 @@ sub genSignCfg
   printf("\nGenerating signing request...\n");
   printf("  FileName:  %s\n", $srcImgPath.$srcImgName);
   printf("  FileSize:  0x%08X (%d Bytes)\n", $imgSize, $imgSize);
-
 
   # Preset expanded size with image size
   $expSize = $imgSize;
@@ -1587,7 +1776,7 @@ sub genSignCfg
   # Print IVT info
   print_verbose1($verbose, "Write image to be signed...\n");
   print_verbose1($verbose, "  DstPath:   %s\n", $dstImgPath.$dstImgName);
-  print_verbose1($verbose, "\nImage vector table (IVT) at offset: 0x08X:\n", $ivtOffs);
+  print_verbose1($verbose, "\nImage vector table (IVT) at offset: 0x%08X:\n", $ivtOffs);
   print_verbose1($verbose, "  Header:    0x%08X (Tag=0x%02X Len=0x%04X (%d Bytes), Ver=0x%02X\n", $ivt->{"header"}, $ivt->{"tag"}, $ivt->{"size"}, $ivt->{"size"}, $ivt->{"ver"});
   print_verbose1($verbose, "  Entry:     0x%08X\n", $ivt->{"entryAddr"});
   print_verbose1($verbose, "  DCD:       0x%08X\n", $ivt->{"sigDcdAddr"});
@@ -1647,7 +1836,7 @@ sub genSignCfg
     $blocks[0]->{"blkSize"} = sprintf("0x%08X", $crcOffs - $ivtOffs);
     $blocks[0]->{"file"} = "\"$dstImgName\",\\";
     
-    # Create first chunk from CRC to CSF
+    # Create second chunk from CRC to CSF
     $blocks[1]->{"blkAddr"} = sprintf("0x%08X", $ivt->{"selfAddr"} + ($crcOffs + $crcSize - $ivtOffs));
     $blocks[1]->{"blkOffs"} = sprintf("0x%08X", $crcOffs + $crcSize);
     $blocks[1]->{"blkSize"} = sprintf("0x%08X", $ivt->{"csfAddr"} - $ivt->{"selfAddr"} - ($crcOffs + $crcSize - $ivtOffs));
@@ -1742,16 +1931,15 @@ sub genSignCfg
     print($cstFile "  ".$blocks[$i]->{"blkAddr"}." ".$blocks[$i]->{"blkOffs"}." ".$blocks[$i]->{"blkSize"}." ".$blocks[$i]->{"file"}."\n");
     print_verbose1($verbose, "  ".$blocks[$i]->{"blkAddr"}." ".$blocks[$i]->{"blkOffs"}." ".$blocks[$i]->{"blkSize"}." ".$blocks[$i]->{"file"}."\n");
   }
-  print_verbose1($verbose, "\n");
   close($cstFile);
 
   
   # RUN the code signing tool (CST)
-  signImage();
+  signImage($cstBinDirPath, $dstImgPath);
 
 
   # Check if signed image exists
-  print_verbose1($verbose, "Check for signature file...\n");
+  print_verbose1($verbose, "\nCheck for signature file...\n");
   if(-e $dstImgPath.$csfImgName)
   {
     # Get and print the CSF size
@@ -1825,7 +2013,7 @@ sub genSignCfg
   print_verbose1($verbose, "\nBoot data at offset 0x%08X:\n", $bootOffs);
   print_verbose1($verbose, "  Start:     0x%08X\n", $boot->{"startAddr"});
   print_verbose1($verbose, "  Length:    0x%08X (%d Bytes)\n", $boot->{"imgSize"}, $boot->{"imgSize"});
-  print_verbose1($verbose, "  Plugin:    0x%08X\n\n", $boot->{"plugin"});
+  print_verbose1($verbose, "  Plugin:    0x%08X\n", $boot->{"plugin"});
 
   # Generate boot data
 #  $bootData = pack("VVVN", $boot->{"startAddr"}, $boot->{"imgSize"}, $boot->{"plugin"}, 0xAFFEDEAD);
@@ -1843,11 +2031,11 @@ sub genSignCfg
   print($expFile $csfPad);
   close($expFile);
 
-  makeHex($srcImgPath, $expImgName, $expHexName, $ivt->{"entryAddr"}, $boot->{"startAddr"});
+#  makeHex($srcImgPath, $expImgName, $expHexName, $ivt->{"entryAddr"}, $boot->{"startAddr"});
   
   return 0;
 }
 
 # This function is called, when the perl script is executed.
-genSignCfg(@cmdArgs);
+main(@cmdArgs);
 

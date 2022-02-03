@@ -6,7 +6,6 @@
 
 use strict;
 use File::Basename;
-use Switch;
 
 
 # Create command arguments from arguments given to this scipt and undefine
