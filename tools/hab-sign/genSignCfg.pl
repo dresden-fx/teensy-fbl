@@ -843,7 +843,7 @@ sub signImage
   $cwd = cwd();
   print("Executing CST-Tool from within ".$cwd."\n");
   
-  $pid = open($cstProc, "cst.exe -i cst.conf -o csf.bin |");
+  $pid = open($cstProc, "cst -i cst.conf -o csf.bin |");
 
   while($line = <$cstProc>)
   {
@@ -1014,7 +1014,7 @@ my $helpMessage = <<"END_HELP";
                                     and its name must match the key file in <cst-dir>/keys
                                     and the key must be in PKCS8 Format and the password 
                                     must be in the file <cst-dir>/keys/key_pass.txt
- --verbose
+ --verbose                          Verbose output
 END_HELP
 
 # The image type determines the following aspects of the image signing:
